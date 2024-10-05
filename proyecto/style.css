@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Playpen+Sans:wght@100..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #e4e3f1;
+}
+
+/* Estilos del contenedor del carrito */
+#cart-container {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease;
+    z-index: 999;
+    padding: 20px;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#cart-items li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#cart-items img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+#cart-items div {
+    flex-grow: 1;
+    text-align: left;
+}
+
+#cart-total {
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: right;
+}
+
+
+/* Estilos del botón de Comprar */
+#cart-container button {
+    background-color: #9c97da;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cart-container button:hover {
+    background-color: #7a73b0;
+}
+
+.cart-container {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Escondido inicialmente */
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -3px 0 5px rgba(0,0,0,0.5);
+    transition: right 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.cart-container h2 {
+    font-family: 'Aclonica', sans-serif;
+    color: #4a4a6a;
+}
+
+.cart-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-container ul li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-container img {
+    width: 50px;
+    height: auto;
+}
+
+.cart-container p {
+    font-family: 'Playpen Sans', sans-serif;
+}
+
+/*buscador*/
+
+.custom-search-button {
+    background-color: #e4e3f1;
+    color: #000; 
+    border: 1px solid #e4e3f1;
+}
+
+.custom-search-button:hover {
+    background-color: #ccc; 
+    border-color: #ccc;
+}
+
+.icon-custom {
+    font-size: 24px; /* Ajusta el tamaño del ícono */
+    color: #9c97da;  /* Cambia el color del ícono */
+}
+
+.nombre-page h1 {
+    font-family: "Aclonica", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 70px;
+    color: #4a4a6a;
+}
+
+a {
+    font-family: "Playpen Sans", cursive;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.nombre-page button {
+    background-color: white;
+    color: #9c97da;
+    font-size: 20px;
+    border-radius: 30px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.nombre-page button:hover {
+    background-color: #9c97da;
+    color: white;
+    transform: scale(1.1);
+}
+
+.img-conejo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.commissions{
+    margin-top: 80px;
+}
+
+.commissions h1, .commissions h2, .commissions p {
+    font-family: "Playpen Sans", cursive;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    color: #4a4a6a;
+    text-align: center;
+}
+
+.commissions button {
+    background-color: white;
+    color: #9c97da;
+    font-size: 20px;
+    border-radius: 30px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    margin-top: 10px;
+}
+
+.commissions button:hover {
+    background-color: #9c97da;
+    color: white;
+    transform: scale(1.1);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.caja1, .caja2, .caja3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    width: 400px;
+    flex-direction: column;
+}
+
+.caja1 img, .caja2 img, .caja3 img {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+/* redes sociales - contacto*/
+
+.contact {
+    margin-top: 100px;
+    margin-bottom: 70px;
+}
+
+.contact h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Playpen Sans", cursive;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    color: #4a4a6a;
+}
+
+.social-media{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.caja1sm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    width: 400px;
+}
+
+.caja1sm img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+.caja2sm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    width: 400px;
+}
+
+.caja2sm img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+.caja3sm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    width: 400px;
+}
+
+.caja3sm img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamy Doodlesay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!--header o nav bar-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container">
+                  <a class="navbar-brand" href="#">
+                    <img src="imagenes/logo.png" alt="Bootstrap" width="30">
+                  </a>
+                </div>
+              </nav>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About me</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="portfolio.html">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Commissions</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn custom-search-button" type="submit">Search</button>
+            </form>
+            <nav class="navbar bg-body-tertiary">
+              <div class="container">
+                <a class="navbar-brand" href="#">
+                  <!-- Icono de usuario -->
+                  <i class="fas fa-user icon-custom"></i>
+                </a>
+              </div>
+          </nav>
+            <nav class="navbar bg-body-tertiary">
+              <div class="container">
+                <a class="navbar-brand" href="#" id="cart-button">
+                  <!-- Icono de carrito de compras -->
+                  <i class="fas fa-shopping-cart icon-custom"></i>
+                </a>
+              </div>
+          </nav>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Contenedor del carrito de compras -->
+    <div class="cart-container" id="cart-container">
+      <h2>Shopping Cart</h2>
+      <ul id="cart-items"></ul>
+      <p id="cart-total">Total: $0</p>
+    </div>
+
+    <!--inicio del contenido-->
+    <div class="container-fluid contenedor-principal">
+      <div class="container-fluid"></div>
+        <div class="contenedor-portada row">
+            <div class="nombre-page col-lg-8">
+                <h1>Dreamy Doodlesay</h1>
+                <a href="portfolio.html">
+                  <button>Portfolio ></button>
+                </a>
+            </div>
+            <div class="img-conejo col-lg-4">
+                <img src="imagenes/conejo.png" alt="img_conejo" width="400px">
+            </div>
+        </div>
+    </div>
+
+    <!--Comisiones-->
+    <div class="commissions container">
+        <h1>Commissions</h1>
+        <div class="contenedor-img row">
+            <div class="col-md-3 caja1">
+                <img src="imagenes/Ejemplo emotes.jpg" alt="emotes-1">
+                <h2>Boceto emote</h2>
+                <p>$3 USD</p>
+                <button class="add-to-cart">Agregar al carrito</button>
+            </div>
+            <div class="col-md-3 caja2">
+                <img src="imagenes/Ejemplo emotes.jpg" alt="emotes-2">
+                <h2>Emote personalizado</h2>
+                <p>$7 USD</p>
+                <button class="add-to-cart">Agregar al carrito</button>
+            </div>
+            <div class="col-md-3 caja3">
+                <img src="imagenes/Ejemplo emotes.jpg" alt="emotes-3">
+                <h2>Pack 3 emotes</h2>
+                <p>$17 USD</p>
+                <button class="add-to-cart">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <!--contacto-->
+    <div class="contact container">
+      <h1>Contact</h1>
+        <div class="social-media row">
+            <div class="col-md-3 caja1sm">
+              <a href="">
+                <img src="imagenes/x.png" alt="x" width="100px">
+              </a>
+            </div>
+            <div class="col-md-3 caja2sm">
+              <a href="">
+                <img src="imagenes/discord.png" alt="discord" width="100px">
+              </a>
+            </div>
+            <div class="col-md-3 caja3sm">
+              <a href="">
+                <img src="imagenes/instagram.png" alt="instagram" width="100px">
+              </a>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
