@@ -45,7 +45,6 @@
             <nav class="navbar bg-body-tertiary">
               <div class="container">
                 <a class="navbar-brand" href="#">
-                  <!-- Icono de usuario -->
                   <i class="fas fa-user icon-custom"></i>
                 </a>
               </div>
@@ -53,7 +52,6 @@
             <nav class="navbar bg-body-tertiary">
               <div class="container">
                 <a class="navbar-brand" href="#" id="cart-button">
-                  <!-- Icono de carrito de compras -->
                   <i class="fas fa-shopping-cart icon-custom"></i>
                 </a>
               </div>
@@ -90,25 +88,42 @@
         <h1>Commissions</h1>
         <div class="contenedor-img row">
             <div class="col-md-3 caja1">
-                <img src="imagenes/Ejemplo emotes.jpg" alt="emotes-1">
+                <img class="emote zoomable" src="imagenes/Ejemplo emotes.jpg" alt="emotes-1">
                 <h2>Boceto emote</h2>
                 <p>$3 USD</p>
                 <button class="add-to-cart">Agregar al carrito</button>
             </div>
             <div class="col-md-3 caja2">
-                <img src="imagenes/Ejemplo emotes.jpg" alt="emotes-2">
+                <img class="emote zoomable" src="imagenes/Ejemplo emotes.jpg" alt="emotes-2">
                 <h2>Emote personalizado</h2>
                 <p>$7 USD</p>
                 <button class="add-to-cart">Agregar al carrito</button>
             </div>
             <div class="col-md-3 caja3">
-                <img src="imagenes/Ejemplo emotes.jpg" alt="emotes-3">
+                <img class="emote zoomable" src="imagenes/Ejemplo emotes.jpg" alt="emotes-3">
                 <h2>Pack 3 emotes</h2>
                 <p>$17 USD</p>
                 <button class="add-to-cart">Agregar al carrito</button>
             </div>
         </div>
     </div>
+
+    <!-- Fondo oscuro y contenedor para imágenes ampliadas -->
+    <div id="overlay" class="overlay">
+        <img id="overlayImage" src="" alt="">
+    </div>
+
+     <!-- Galería -->
+      <div class="gallery-contenedor container-fluid">
+          <h1>Gallery</h1>
+            <img src="imagenes/Ejemplo emotes.jpg" alt="emote1">
+            <img src="imagenes/Ejemplo emotes.jpg" alt="emote2">
+            <img src="imagenes/Ejemplo emotes.jpg" alt="emote3">
+            <img src="imagenes/Ejemplo emotes.jpg" alt="emote4">
+            <img src="imagenes/Ejemplo emotes.jpg" alt="emote5">
+          <div class="gallery container-fluid col-md-8"></div>      
+      </div> 
+     
 
     <!--contacto-->
     <div class="contact container">
@@ -132,7 +147,6 @@
         </div>
     </div>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>

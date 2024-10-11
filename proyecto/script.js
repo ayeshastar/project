@@ -58,6 +58,13 @@ document.addEventListener('click', function(event) {
     }
 });
 
+// Cerrar el carrito al presionar la tecla "Esc"
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        cartContainer.style.right = '-300px';
+    }
+});
+
 // Función para añadir un producto al carrito
 function addToCart(name, price, imageSrc) {
     const existingProduct = cart.find(item => item.name === name);
@@ -90,7 +97,7 @@ function renderCartItems() {
             <div>
                 <strong>${item.name}</strong><br>
                 $${item.price.toFixed(2)} x 
-                <input type="number" id="quantity-${index}" value="${item.quantity}" min="1" style="width: 50px;" /> <!-- Input de cantidad más pequeño -->
+                <input type="number" id="quantity-${index}" value="${item.quantity}" min="1" style="width: 50px;" />
             </div>
             <i class="fas fa-trash remove-item" data-name="${item.name}"></i>
         `;
@@ -187,3 +194,70 @@ checkoutButton.addEventListener('click', function() {
     alert('¡Gracias por tu compra!');
     // Aquí puedes agregar la funcionalidad de procesamiento del pedido
 });
+
+// ----------zoom en las imagenes----------
+
+// Seleccionar elementos
+const overlay = document.getElementById('overlay');
+const overlayImage = document.getElementById('overlayImage');
+const zoomableImages = document.querySelectorAll('.zoomable');
+
+// Mostrar imagen ampliada al hacer clic
+zoomableImages.forEach(image => {
+    image.addEventListener('click', () => {
+        overlayImage.src = image.src;
+        overlay.style.display = 'flex';
+    });
+});
+
+// Cerrar imagen ampliada al hacer clic fuera
+overlay.addEventListener('click', () => {
+    overlay.style.display = 'none';
+});
+
+//------------movimiento de la galería-------------
+// Seleccionar las imágenes de la galería
+const galleryImages = document.querySelectorAll('.gallery img');
+
+// Mostrar imagen ampliada al hacer clic en la galería
+galleryImages.forEach(image => {
+    image.addEventListener('click', () => {
+        overlayImage.src = image.src;
+        overlay.style.display = 'flex';
+    });
+});
+
+// scroll
+let imageCount = 5; // Contador de imágenes inicial
+const totalImages = 15; // Total de imágenes que deseas cargar
+
+// Simulación de carga de imágenes
+const loadImages = () => {
+    const galleryContainer = document.querySelector('.gallery');
+
+    // Solo cargar imágenes si hay más para mostrar
+    if (imageCount < totalImages) {
+        for (let i = imageCount; i < imageCount + 5 && i < totalImages; i++) {
+            const img = document.createElement('img');
+            img.src = 'imagenes/Ejemplo emotes.jpg'; // Cambia esto por la URL de tus imágenes
+            img.alt = `emote${i + 1}`;
+            galleryContainer.appendChild(img);
+
+            // Usamos un timeout para que la clase "visible" se añada después de un pequeño delay
+            setTimeout(() => {
+                img.classList.add('visible');
+            }, 5);
+        }
+
+        imageCount += 5; // Aumenta el contador
+    }
+};
+
+// Evento de scroll
+window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        loadImages();
+    }
+});
+
+
