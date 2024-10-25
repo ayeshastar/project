@@ -9,7 +9,7 @@ const checkoutButton = document.createElement('button'); // Crear el botón de c
 let cart = [];
 let discount = 0;
 
-// Inicialmente ocultamos el botón de comprar
+// Ocultar el botón de comprar
 checkoutButton.textContent = 'Comprar';
 checkoutButton.style.display = 'none';
 checkoutButton.style.backgroundColor = '#9c97da'; // Color del botón de comprar
@@ -23,10 +23,10 @@ discountInput.placeholder = 'Código de descuento';
 discountInput.style.marginBottom = '10px';
 discountInput.style.width = '100px'; // Ancho del input
 
-// Agregamos primero el input de descuento y el botón de aplicar descuento
+// Agregar primero el input de descuento y el botón de aplicar descuento
 cartContainer.appendChild(discountInput);
-cartContainer.appendChild(applyDiscountButton); // Agregamos el botón de aplicar descuento
-cartContainer.appendChild(checkoutButton); // Agregamos el botón de comprar
+cartContainer.appendChild(applyDiscountButton); // Agregar el botón de aplicar descuento
+cartContainer.appendChild(checkoutButton); // Agregar el botón de comprar
 
 // Configuración del botón de aplicar descuento
 applyDiscountButton.textContent = 'Aplicar descuento';
@@ -70,7 +70,7 @@ function addToCart(name, price, imageSrc) {
     const existingProduct = cart.find(item => item.name === name);
 
     if (existingProduct) {
-        existingProduct.quantity += 1; // Si ya está en el carrito, aumentamos la cantidad
+        existingProduct.quantity += 1; // Si ya está en el carrito, aumenta la cantidad
     } else {
         cart.push({
             name: name,
@@ -83,6 +83,10 @@ function addToCart(name, price, imageSrc) {
     renderCartItems();
     updateCartTotal();
     toggleCheckoutButton(); // Verificar si el botón de "Comprar" debe mostrarse
+
+    // Disparar evento personalizado de carrito actualizado
+    const cartUpdatedEvent = new CustomEvent('cartUpdated', { detail: cart });
+    document.dispatchEvent(cartUpdatedEvent);
 }
 
 // Función para renderizar los productos en el carrito
@@ -130,6 +134,10 @@ function updateProductQuantity(productName, newQuantity) {
         product.quantity = newQuantity; // Actualizar la cantidad
         renderCartItems();
         updateCartTotal();
+
+        // Disparar evento personalizado de carrito actualizado
+        const cartUpdatedEvent = new CustomEvent('cartUpdated', { detail: cart });
+        document.dispatchEvent(cartUpdatedEvent);
     }
 }
 
@@ -148,6 +156,10 @@ function removeFromCart(productName) {
     renderCartItems();
     updateCartTotal();
     toggleCheckoutButton(); // Verificar si el botón de "Comprar" debe mostrarse
+
+    // Disparar evento personalizado de carrito actualizado
+    const cartUpdatedEvent = new CustomEvent('cartUpdated', { detail: cart });
+    document.dispatchEvent(cartUpdatedEvent);
 }
 
 // Función para actualizar el total del carrito
@@ -172,6 +184,10 @@ applyDiscountButton.addEventListener('click', function() {
     if (code === 'Emotes5') {
         discount = 0.05; // 5% de descuento
         alert('Descuento del 5% aplicado.');
+
+        // Disparar evento personalizado de descuento aplicado
+        const discountAppliedEvent = new CustomEvent('discountApplied', { detail: discount });
+        document.dispatchEvent(discountAppliedEvent);
     } else {
         discount = 0; // No hay descuento
         alert('Código de descuento inválido.');
@@ -189,10 +205,26 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
     });
 });
 
-// Evento del botón "Comprar" (aquí podrías agregar la lógica de compra)
+// Evento del botón "Comprar"
 checkoutButton.addEventListener('click', function() {
     alert('¡Gracias por tu compra!');
-    // Aquí puedes agregar la funcionalidad de procesamiento del pedido
+
+    // Disparar evento personalizado de compra completada
+    const checkoutCompletedEvent = new CustomEvent('checkoutCompleted', { detail: cart });
+    document.dispatchEvent(checkoutCompletedEvent);
+});
+
+// Manejo de los eventos personalizados
+document.addEventListener('cartUpdated', function(event) {
+    console.log('El carrito ha sido actualizado:', event.detail);
+});
+
+document.addEventListener('discountApplied', function(event) {
+    console.log('Descuento aplicado:', event.detail);
+});
+
+document.addEventListener('checkoutCompleted', function(event) {
+    console.log('Compra completada:', event.detail);
 });
 
 // ----------zoom en las imagenes----------
@@ -202,30 +234,26 @@ const overlay = document.getElementById('overlay');
 const overlayImage = document.getElementById('overlayImage');
 const zoomableImages = document.querySelectorAll('.zoomable');
 
-// Mostrar imagen ampliada al hacer clic
-zoomableImages.forEach(image => {
-    image.addEventListener('click', () => {
-        overlayImage.src = image.src;
-        overlay.style.display = 'flex';
-    });
-});
+// Función para mostrar la imagen en el overlay
+function showOverlay(imageSrc) {
+    overlayImage.src = imageSrc;
+    overlay.style.display = 'flex';
+}
 
-// Cerrar imagen ampliada al hacer clic fuera
-overlay.addEventListener('click', () => {
+// Función para ocultar el overlay
+function hideOverlay() {
     overlay.style.display = 'none';
-});
+}
 
-//------------movimiento de la galería-------------
-// Seleccionar las imágenes de la galería
-const galleryImages = document.querySelectorAll('.gallery img');
-
-// Mostrar imagen ampliada al hacer clic en la galería
-galleryImages.forEach(image => {
-    image.addEventListener('click', () => {
-        overlayImage.src = image.src;
-        overlay.style.display = 'flex';
+// Añadir evento de clic a cada imagen
+zoomableImages.forEach(img => {
+    img.addEventListener('click', function() {
+        showOverlay(this.src);
     });
 });
+
+// Añadir evento de clic al overlay para ocultarlo
+overlay.addEventListener('click', hideOverlay);
 
 // scroll
 let imageCount = 5; // Contador de imágenes inicial
@@ -259,5 +287,3 @@ window.addEventListener('scroll', () => {
         loadImages();
     }
 });
-
-
