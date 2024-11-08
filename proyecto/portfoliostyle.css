@@ -55,3 +55,16 @@ table, th, td {
     font-style: normal;
     color: #4a4a6a; /* Color del texto de la tabla */
 }
+
+#edit-button {
+    background-color: #9c97da; 
+    color: white;            
+    border: none;             
+    padding: 10px 20px;      
+    margin-bottom: 10px;     
+    cursor: pointer;          
+  }
+  
+  #edit-button i {
+    margin-right: 5px;      
+  }

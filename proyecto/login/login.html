@@ -77,6 +77,15 @@
                 <p>o Iniciar Sesión con una cuenta</p>
                 <form class="form form-login" novalidate>
                     <div>
+                        <label>
+                            <i class='bx bx-user'></i>
+                            <select name="userType">
+                                <option value="regular">Usuario Regular</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
                         <label >
                             <i class='bx bx-envelope' ></i>
                             <input type="email" placeholder="Correo Electronico" name="userEmail">
@@ -97,7 +106,6 @@
     </div>
     <script src="script-login.js"></script>
     <script src="register.js" type="module"></script>
-    <!-- <script src="js/iffe_login.js"></script> -->
     <script src="login.js" type="module"></script>
 </body>
 </html>
