@@ -8,63 +8,62 @@ const alertaExitoLogin = document.querySelector(".form-login .alerta-exito");
 
 // Usuarios
 const users = {
-  "admin": {
-    email: "admin@example.com",
-    password: "admin123",
-    type: "admin"
-  },
-  "user1": {
-    email: "user1@example.com",
-    password: "user123",
-    type: "regular"
-  }
+    "admin": {
+        email: "admin@example.com",
+        password: "admin123",
+        type: "admin"
+    }
 };
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  formLogin.addEventListener("submit", (e) => {
-    estadoValidacionCampos.userName = true;
-    e.preventDefault();
-    enviarFormulario(formLogin, alertaErrorLogin, alertaExitoLogin);
-  });
+    formLogin.addEventListener("submit", (e) => {
+        estadoValidacionCampos.userName = true;
+        e.preventDefault();
+        enviarFormulario(formLogin, alertaErrorLogin, alertaExitoLogin);
+    });
 
-  inputEmail.addEventListener("input", () => {
-    validarCampo(emailRegex, inputEmail, "El correo solo puede contener letras, números, puntos, guiones y guíon bajo.");
-  });
+    inputEmail.addEventListener("input", () => {
+        validarCampo(emailRegex, inputEmail, "El correo solo puede contener letras, números, puntos, guiones y guíon bajo.");
+    });
 
-  inputPass.addEventListener("input", () => {
-    validarCampo(passwordRegex, inputPass, "La contraseña tiene que ser de 4 a 12 dígitos");
-  });
+    inputPass.addEventListener("input", () => {
+        validarCampo(passwordRegex, inputPass, "La contraseña tiene que ser de 4 a 12 dígitos");
+    });
 });
 
 export function enviarFormulario(form, alertaError, alertaExito) {
-  const email = form.userEmail.value;
-  const password = form.userPassword.value;
-  const userType = form.userType.value; // Obtener el tipo de usuario
+    const email = form.userEmail.value;
+    const password = form.userPassword.value;
 
-  // Buscar al usuario en el objeto 'users'
-  const user = Object.values(users).find(user => user.email === email && user.password === password);
+    // Buscar al usuario en localStorage
+    let user = JSON.parse(localStorage.getItem(email));
 
-  if (user && user.type === userType) { 
-    // Guardar el tipo de usuario en localStorage
-    localStorage.setItem('userType', userType); 
+    // Si no se encuentra en localStorage, buscar en el objeto 'users'
+    if (!user) {
+      user = Object.values(users).find(user => user.email === email && user.password === password);
+    }
 
-    // Mostrar alerta de éxito
-    form.reset();
-    alertaExito.classList.add("alertaExito");
-    alertaError.classList.remove("alertaError");
+    if (user) {
+        // Guardar el tipo de usuario en localStorage
+        localStorage.setItem('userType', user.type);
+
+        // Mostrar alerta de éxito
+        form.reset();
+        alertaExito.classList.add("alertaExito");
+        alertaError.classList.remove("alertaError");
+        setTimeout(() => {
+            alertaExito.classList.remove("alertaExito");
+            // Redirigir a la página principal después de iniciar sesión
+            window.location.href = "../index.html"; 
+        }, 3000);
+        return;
+    }
+
+    // Mostrar alerta de error si las credenciales son incorrectas
+    alertaExito.classList.remove("alertaExito");
+    alertaError.classList.add("alertaError");
     setTimeout(() => {
-      alertaExito.classList.remove("alertaExito");
-      // Redirigir a la página principal después de iniciar sesión
-      window.location.href = "../index.html"; 
+        alertaError.classList.remove("alertaError");
     }, 3000);
-    return;
-  }
-
-  // Mostrar alerta de error si las credenciales son incorrectas
-  alertaExito.classList.remove("alertaExito");
-  alertaError.classList.add("alertaError");
-  setTimeout(() => {
-    alertaError.classList.remove("alertaError");
-  }, 3000);
 }
+

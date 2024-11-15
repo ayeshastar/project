@@ -10,78 +10,92 @@ export const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 export const passwordRegex = /^.{4,12}$/;
 
 export const estadoValidacionCampos = {
-  userName: false,
-  userEmail: false,
-  userPassword: false,
+    userName: false,
+    userEmail: false,
+    userPassword: false,
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  formRegister.addEventListener("submit", (e) => {
-    e.preventDefault();
-    enviarFormulario(formRegister,alertaError,alertaExito);
-  });
+    formRegister.addEventListener("submit", (e) => {
+        e.preventDefault();
+        enviarFormulario(formRegister,alertaError,alertaExito);
+    });
 
-  inputUser.addEventListener("input", () => {
-    validarCampo(userNameRegex,inputUser,"El usuario tiene que ser de 4 a 16 dígitos y solo puede contener, letras y guión bajo.");
-  });
+    inputUser.addEventListener("input", () => {
+        validarCampo(userNameRegex,inputUser,"El usuario tiene que ser de 4 a 16 dígitos y solo puede contener, letras y guión bajo.");
+    });
 
-  inputEmail.addEventListener("input", () => {
-    validarCampo(emailRegex,inputEmail,"El correo solo puede contener letras, números, puntos, guiones y guíon bajo.");
-  });
+    inputEmail.addEventListener("input", () => {
+        validarCampo(emailRegex,inputEmail,"El correo solo puede contener letras, números, puntos, guiones y guíon bajo.");
+    });
 
-  inputPass.addEventListener("input", () => {
-    validarCampo(passwordRegex,inputPass,"La contraseña tiene que ser de 4 a 12 dígitos");
-  });
+    inputPass.addEventListener("input", () => {
+        validarCampo(passwordRegex,inputPass,"La contraseña tiene que ser de 4 a 12 dígitos");
+    });
 });
 
 export function validarCampo(regularExpresion, campo, mensaje) {
-  const validarCampo= regularExpresion.test(campo.value);
-  if (validarCampo) {
-    eliminarAlerta(campo.parentElement.parentElement);
-    estadoValidacionCampos[campo.name] = true;
-    campo.parentElement.classList.remove("error");
-    return;
-  }
-  estadoValidacionCampos[campo.name] = false;
-  campo.parentElement.classList.add("error");
-  mostrarAlerta(campo.parentElement.parentElement,mensaje);
+    const validarCampo= regularExpresion.test(campo.value);
+    if (validarCampo) {
+        eliminarAlerta(campo.parentElement.parentElement);
+        estadoValidacionCampos[campo.name] = true;
+        campo.parentElement.classList.remove("error");
+        return;
+    }
+    estadoValidacionCampos[campo.name] = false;
+    campo.parentElement.classList.add("error");
+    mostrarAlerta(campo.parentElement.parentElement,mensaje);
 }
 
 function mostrarAlerta(referencia,mensaje) {
-  eliminarAlerta(referencia);
-  const alertaDiv = document.createElement("div");
-  alertaDiv.classList.add("alerta");
-  alertaDiv.textContent = mensaje;
-  referencia.appendChild(alertaDiv);
+    eliminarAlerta(referencia);
+    const alertaDiv = document.createElement("div");
+    alertaDiv.classList.add("alerta");
+    alertaDiv.textContent = mensaje;
+    referencia.appendChild(alertaDiv);
 }
 
 function eliminarAlerta(referencia) {
-  const alerta = referencia.querySelector(".alerta");
+    const alerta = referencia.querySelector(".alerta");
 
-  if (alerta) alerta.remove();
+    if (alerta) alerta.remove();
 }
 
 export function enviarFormulario(form, alertaError,alertaExito) {
-  //VALIDAMOS EL ENVIO DE NUESTRO FORMULARIO
+    //VALIDAMOS EL ENVIO DE NUESTRO FORMULARIO
 
-  if (estadoValidacionCampos.userName && estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
-    //Se agregó estas 3 líneas de código que evitan un error al mostrar las alertas , lo que hacen es resetear los valores del objeto
-    estadoValidacionCampos.userName = false;
-    estadoValidacionCampos.userEmail = false;
-    estadoValidacionCampos.userPassword = false;
+    if (estadoValidacionCampos.userName && estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
+        //Se agregó estas 3 líneas de código que evitan un error al mostrar las alertas , lo que hacen es resetear los valores del objeto
+        estadoValidacionCampos.userName = false;
+        estadoValidacionCampos.userEmail = false;
+        estadoValidacionCampos.userPassword = false;
 
-    form.reset();
-    alertaExito.classList.add("alertaExito");
-    alertaError.classList.remove("alertaError");
+        // Obtener los datos del formulario de registro
+        const userName = form.userName.value;
+        const userEmail = form.userEmail.value;
+        const userPassword = form.userPassword.value;
+
+        // Guardar al usuario en localStorage
+        const newUser = {
+          email: userEmail,
+          password: userPassword,
+          type: "regular", // Los nuevos usuarios son regulares por defecto
+          name: userName
+        };
+        localStorage.setItem(userEmail, JSON.stringify(newUser));
+
+        form.reset();
+        alertaExito.classList.add("alertaExito");
+        alertaError.classList.remove("alertaError");
+        setTimeout(() => {
+            alertaExito.classList.remove("alertaExito");
+        }, 3000); 
+        return;
+    }
+    
+    alertaExito.classList.remove("alertaExito");
+    alertaError.classList.add("alertaError");
     setTimeout(() => {
-      alertaExito.classList.remove("alertaExito");
-    }, 3000); 
-    return;
-  }
-  
-  alertaExito.classList.remove("alertaExito");
-  alertaError.classList.add("alertaError");
-  setTimeout(() => {
-    alertaError.classList.remove("alertaError");
-  }, 3000);
+        alertaError.classList.remove("alertaError");
+    }, 3000);
 }

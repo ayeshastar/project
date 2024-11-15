@@ -37,33 +37,38 @@ applyDiscountButton.style.border = 'none';
 applyDiscountButton.style.padding = '5px 10px';
 applyDiscountButton.style.cursor = 'pointer';
 
-// Mostrar / ocultar carrito al hacer clic en el botón
+// Mostrar / ocultar carrito al hacer clic en el botón, considerando el tipo de usuario
 cartButton.addEventListener('click', function() {
-    toggleCart();
-});
-
-// Función para alternar el carrito
-function toggleCart() {
-    if (cartContainer.style.right === '-300px') {
-        cartContainer.style.right = '0';
+    const userType = localStorage.getItem('userType');
+    if (userType === "admin") {
+      alert("El administrador no tiene acceso al carrito de compras.");
     } else {
-        cartContainer.style.right = '-300px';
+      toggleCart();
     }
-}
-
-// Cerrar el carrito al hacer clic fuera de él
-document.addEventListener('click', function(event) {
+  });
+  
+  // Función para alternar el carrito
+  function toggleCart() {
+    if (cartContainer.style.right === '-300px') {
+      cartContainer.style.right = '0';
+    } else {
+      cartContainer.style.right = '-300px';
+    }
+  }
+  
+  // Cerrar el carrito al hacer clic fuera de él
+  document.addEventListener('click', function(event) {
     if (!cartContainer.contains(event.target) && !cartButton.contains(event.target)) {
-        cartContainer.style.right = '-300px';
+      cartContainer.style.right = '-300px';
     }
-});
-
-// Cerrar el carrito al presionar la tecla "Esc"
-document.addEventListener('keydown', function(event) {
+  });
+  
+  // Cerrar el carrito al presionar la tecla "Esc"
+  document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
-        cartContainer.style.right = '-300px';
+      cartContainer.style.right = '-300px';
     }
-});
+  });
 
 // Función para añadir un producto al carrito
 function addToCart(name, price, imageSrc) {
@@ -88,6 +93,21 @@ function addToCart(name, price, imageSrc) {
     const cartUpdatedEvent = new CustomEvent('cartUpdated', { detail: cart });
     document.dispatchEvent(cartUpdatedEvent);
 }
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function(event) { // Agregar el parámetro 'event'
+      event.stopPropagation(); // Detener la propagación del evento
+      const userType = localStorage.getItem('userType');
+      if (userType === "admin") {
+        alert("El administrador no puede realizar compras.");
+      } else {
+        const productName = this.previousElementSibling.previousElementSibling.textContent;
+        const productPrice = this.previousElementSibling.textContent;
+        const productImage = this.parentElement.querySelector('img').src;
+        addToCart(productName, productPrice, productImage);
+      }
+    });
+  });
 
 // Función para renderizar los productos en el carrito
 function renderCartItems() {
@@ -193,16 +213,6 @@ applyDiscountButton.addEventListener('click', function() {
         alert('Código de descuento inválido.');
     }
     updateCartTotal(); // Actualizar total después de aplicar descuento
-});
-
-// Ejemplo de cómo agregar productos al carrito (añadir a cada botón su respectivo evento)
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', function() {
-        const productName = this.previousElementSibling.previousElementSibling.textContent;
-        const productPrice = this.previousElementSibling.textContent;
-        const productImage = this.parentElement.querySelector('img').src;
-        addToCart(productName, productPrice, productImage);
-    });
 });
 
 // Evento del botón "Comprar"

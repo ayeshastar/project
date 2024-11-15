@@ -1,0 +1,63 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url(../login/img-login/creativity-background-abstract-liquid-design.jpg);
+    background-size: cover;
+}
+
+.reset-container,
+.token-container,
+.new-password-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8f8f8;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(222, 200, 243, 0.1);
+    z-index: 10; /* Asegurarse de que esté por encima del formulario de login */
+}
+
+.reset-content,
+.token-content,
+.new-password-content {
+    text-align: center;
+}
+
+.reset-container h2,
+.token-container h2,
+.new-password-container h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.reset-container input,
+.token-container input,
+.new-password-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.reset-container button,
+.token-container button,
+.new-password-container button {
+    background-color: #9191bd;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reset-message,
+.token-message,
+.new-password-message {
+    color: #d9534f; /* Color rojo para mensajes*/
+}
